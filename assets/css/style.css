@@ -1,8 +1,15 @@
-:root{--bg:#f8f9fa}
-body{background:var(--bg);font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial}
-#phaser-container{height:320px;min-height:240px}
-.choice-btn{min-width:110px}
-@media (max-width:576px){
-#phaser-container{height:220px}
-.choice-btn{flex:1 1 auto}
+:root{
+  --accent: #0d6efd;
+  --card-radius: 12px;
 }
+body { background: linear-gradient(180deg,#f8f9fa,#ffffff); min-height:100vh; }
+#game-container { width:100%; height:420px; border-radius:12px; overflow:hidden; background:#0f1720; }
+#controls .choice-btn { margin-right:.5rem; margin-top:.4rem; }
+.card { border-radius: var(--card-radius); }
+@media (max-width:767px){
+  #game-container { height:320px; }
+}
+.high-contrast {
+  filter: contrast(130%) saturate(120%);
+}
+button.choice-btn img { width:44px; height:44px; display:inline-block; vertical-align:middle; }
