@@ -1,0 +1,7 @@
+/* styles.css — small improvements on top of Bootstrap */
+body { background: #f8f9fa; }
+.move-btn { min-height: 86px; font-size: 1.05rem; }
+#roundResult { white-space: pre-wrap; }
+@media (max-width: 576px) {
+.move-btn { font-size: 0.95rem; min-height: 74px; }
+}
