@@ -1,72 +1,73 @@
-// script.js — Rock Paper Scissors Lizard Spock game logic with difficulty and simple pattern matching
+/* main.js — game logic using Phaser and DOM integration */
 
-const MOVES = ['rock', 'paper', 'scissors', 'lizard', 'spock'];
-const BEATS = {
-  rock: ['scissors', 'lizard'],
-  paper: ['rock', 'spock'],
-  scissors: ['paper', 'lizard'],
-  lizard: ['paper', 'spock'],
-  spock: ['rock', 'scissors']
+
+// Game rules
+const CHOICES = ['rock','paper','scissors','lizard','spock'];
+const WINS = {
+rock: ['scissors','lizard'],
+paper: ['rock','spock'],
+scissors: ['paper','lizard'],
+lizard: ['paper','spock'],
+spock: ['rock','scissors']
 };
 
-let playerScore = 0;
-let computerScore = 0;
-let roundsLeft = 10;
-let maxRounds = 10;
-let history = []; // {player, computer, result}
 
-// Elements
-const playerScoreEl = document.getElementById('playerScore');
-const computerScoreEl = document.getElementById('computerScore');
-const roundsLeftEl = document.getElementById('roundsLeft');
-const statusMessageEl = document.getElementById('statusMessage');
-const roundResultEl = document.getElementById('roundResult');
-const historyEl = document.getElementById('history');
-const moveBtns = document.querySelectorAll('.move-btn');
-const difficultyEl = document.getElementById('difficulty');
-const maxRoundsEl = document.getElementById('maxRounds');
-const maxRoundsLabel = document.getElementById('maxRoundsLabel');
-const resetBtn = document.getElementById('resetBtn');
-const gameOverCard = document.getElementById('gameOverCard');
-const gameOverTitle = document.getElementById('gameOverTitle');
-const gameOverSummary = document.getElementById('gameOverSummary');
-const playAgainBtn = document.getElementById('playAgainBtn');
+// State
+let state = {
+playerScore: 0,
+computerScore: 0,
+roundsPlayed: 0,
+roundsMax: 10,
+history: [], // {player, computer, result}
+difficulty: 'normal'
+};
 
-// Initialize
-function init() {
-  playerScore = 0;
-  computerScore = 0;
-  history = [];
-  maxRounds = parseInt(maxRoundsEl.value, 10) || 10;
-  roundsLeft = maxRounds;
-  updateUI();
-  roundResultEl.textContent = 'No rounds yet.';
-  historyEl.textContent = 'No history yet.';
-  statusMessageEl.textContent = 'Choose your move to start';
-  gameOverCard.classList.add('d-none');
+
+// Persistence
+function saveState(){ localStorage.setItem('rpsls_state', JSON.stringify(state)); }
+function loadState(){
+const s = localStorage.getItem('rpsls_state');
+if(s) Object.assign(state, JSON.parse(s));
 }
 
-function updateUI() {
-  playerScoreEl.textContent = playerScore;
-  computerScoreEl.textContent = computerScore;
-  roundsLeftEl.textContent = roundsLeft;
-  maxRoundsLabel.textContent = maxRounds;
+
+loadState();
+
+
+document.addEventListener('DOMContentLoaded', ()=>{
+// DOM refs
+const buttons = document.querySelectorAll('.choice-btn');
+const msg = document.getElementById('message');
+const scoreP = document.getElementById('score-player');
+const scoreC = document.getElementById('score-computer');
+const roundsPlayed = document.getElementById('rounds-played');
+const roundsMax = document.getElementById('rounds-max');
+const historyList = document.getElementById('history');
+const restartBtn = document.getElementById('restart-btn');
+const difficulty = document.getElementById('difficulty');
+
+
+roundsMax.textContent = state.roundsMax;
+difficulty.value = state.difficulty;
+
+
+function refreshUI(){
+scoreP.textContent = state.playerScore;
+scoreC.textContent = state.computerScore;
+roundsPlayed.textContent = state.roundsPlayed;
+// history
+historyList.innerHTML = '';
+state.history.slice().reverse().forEach(h => {
+const li = document.createElement('li');
+li.textContent = `You: ${h.player} — Comp: ${h.computer} → ${h.result}`;
+historyList.appendChild(li);
+});
 }
 
-// --- Difficulty logic ---
-function computerChoose() {
-  const difficulty = difficultyEl.value;
-  if (difficulty === 'easy') return randomChoice();
-  if (difficulty === 'medium') return mediumChoice();
-  return hardChoice();
-}
 
-function randomChoice() {
-  return MOVES[Math.floor(Math.random() * MOVES.length)];
+function determineWinner(player, computer){
+if(player===computer) return 'draw';
+if(WINS[player].includes(computer)) return 'player';
+return 'computer';
 }
-
-function mediumChoice() {
-  // Bias towards beating player's most frequent move so far
-  if (history.length === 0) return randomChoice();
-  const freq = {};
-  history.forEach(h => { f
+create: cre
