@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rock Paper Scissors Lizard Spock</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="container py-4">
+<header class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+<a href="#" class="d-flex align-items-center text-dark text-decoration-none">
+<h1 class="h3 mb-0">RPSLS — Play vs Computer</h1>
+</a>
+<nav class="ms-md-auto">
+<div class="d-flex gap-2">
+<label class="form-label mb-0 me-2">Difficulty</label>
+<select id="difficulty" class="form-select form-select-sm w-auto">
+<option value="easy">Easy</option>
+<option value="medium" selected>Medium</option>
+<option value="hard">Hard</option>
+</select>
+</div>
+</nav>
+</header>
+
+
+<main>
+<div class="row g-3">
+<section class="col-12 col-md-4">
+<div class="card">
+<div class="card-body">
+<h2 class="card-title h5">Score & Status</h2>
+<div class="d-flex justify-content-between align-items-center mb-2">
+<div>
+<div class="small text-muted">Player</div>
+<div id="playerScore" class="fs-4">0</div>
+</div>
+<div>
+<div class="small text-muted">Computer</div>
+<div id="computerScore" class="fs-4">0</div>
+</div>
+<div>
+<div class="small text-muted">Rounds left</div>
+<div id="roundsLeft" class="fs-4">10</div>
+</div>
+</div>
+
+
+<div class="mb-2">
+<div class="small text-muted">Status</div>
+<div id="statusMessage" class="fw-semibold">Choose your move to start</div>
+</div>
+
+
+<div class="mb-2">
+<label class="form-label small">Tries per game</label>
+<input id="maxRounds" type="range" min="3" max="20" value="10" class="form-range">
+<div class="small text-muted"><span id="maxRoundsLabel">10</span> rounds</div>
+</div>
+
+
+<button id="resetBtn" class="btn btn-outline-secondary btn-sm mt-2">Reset Game</button>
+</div>
+</div>
+
+
+<div class="card mt-3 d-none" id="gameOverCard">
+<div class="card-body text-center">
+<h3 id="gameOverTitle" class="h5">Game over</h3>
+<p id="gameOverSummary" class="small"></p>
+<button id="playAgainBtn" class="btn btn-primary btn-sm">Play again</button>
+</div>
+</div>
+</section>
+
+
+<section class="col-12 col-md-8">
+<div class="card">
+<div class="card-body">
+<h2 class="h5">Make your move</h2>
+
+
+<div class="row g-2 align-items-center mt-2">
+<div class="col-6 col-sm-3">
+<button class="move-btn btn btn-light w-100" data-move="rock">🪨<br><small>Rock</small></button>
+</html>
